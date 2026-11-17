@@ -3,6 +3,9 @@ services:
     build:
       context: .
       target: development
+    environment:
+      REMAINS_API_TARGET: http://host.docker.internal:8000
+      REMAINS_MINIO_TARGET: http://host.docker.internal:9000
     ports:
       - "3000:3000"
     volumes:

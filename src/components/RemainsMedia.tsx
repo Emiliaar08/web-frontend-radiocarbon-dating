@@ -1,6 +1,6 @@
 import type { SyntheticEvent } from 'react'
 import Image from 'react-bootstrap/Image'
-import { DEFAULT_REMAIN_IMAGE, DEFAULT_REMAIN_VIDEO } from '../modules/remains'
+import { DEFAULT_REMAIN_IMAGE, DEFAULT_REMAIN_VIDEO, proxiedRemainMedia } from '../modules/remains'
 
 interface RemainsImageProps {
   imageUrl: string
@@ -19,7 +19,7 @@ export function RemainsImage({ imageUrl, title, className }: RemainsImageProps) 
   return (
     <Image
       className={className}
-      src={imageUrl.trim() || DEFAULT_REMAIN_IMAGE}
+      src={proxiedRemainMedia(imageUrl) || DEFAULT_REMAIN_IMAGE}
       alt={title}
       onError={handleImageError}
     />
@@ -29,9 +29,11 @@ export function RemainsImage({ imageUrl, title, className }: RemainsImageProps) 
 interface RemainsVideoProps {
   videoUrl: string
   title: string
+  controls?: boolean
+  className?: string
 }
 
-export function RemainsVideo({ videoUrl, title }: RemainsVideoProps) {
+export function RemainsVideo({ videoUrl, title, controls = false, className = 'remains-video' }: RemainsVideoProps) {
   function handleVideoError(event: SyntheticEvent<HTMLVideoElement>) {
     const video = event.currentTarget
     if (video.getAttribute('src') !== DEFAULT_REMAIN_VIDEO) {
@@ -43,14 +45,15 @@ export function RemainsVideo({ videoUrl, title }: RemainsVideoProps) {
   return (
     <video
       key={videoUrl}
-      className="remains-video"
-      src={videoUrl.trim() || DEFAULT_REMAIN_VIDEO}
+      className={className}
+      src={proxiedRemainMedia(videoUrl) || DEFAULT_REMAIN_VIDEO}
       aria-label={`Видео образца: ${title}`}
-      autoPlay
+      controls={controls}
+      autoPlay={!controls}
       muted
-      loop
+      loop={!controls}
       playsInline
-      preload="auto"
+      preload={controls ? 'metadata' : 'auto'}
       onError={handleVideoError}
     />
   )

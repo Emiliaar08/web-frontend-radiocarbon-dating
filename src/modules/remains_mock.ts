@@ -10,6 +10,8 @@ export const REMAINS_MOCK: readonly Remain[] = [
     analysis_time_days: 14,
     carbon_14_pmc: 1.385,
     likes_count: 12,
+    is_liked: false,
+    is_mine: false,
   },
   {
     id: 9,
@@ -20,6 +22,8 @@ export const REMAINS_MOCK: readonly Remain[] = [
     analysis_time_days: 14,
     carbon_14_pmc: 34.45,
     likes_count: 23,
+    is_liked: false,
+    is_mine: false,
   },
   {
     id: 10,
@@ -30,15 +34,19 @@ export const REMAINS_MOCK: readonly Remain[] = [
     analysis_time_days: 14,
     carbon_14_pmc: 73.338,
     likes_count: 30,
+    is_liked: false,
+    is_mine: false,
   },
   {
     id: 19,
-    title: 'Дерево',
+    title: 'Древесина',
     description: 'Датирование древесины по содержанию углерода-14 после очистки образца. Для исследования выбирают хорошо сохранившийся фрагмент и по возможности учитывают расположение годичных колец.',
     image_url: '',
     video_url: '',
     analysis_time_days: 12,
     carbon_14_pmc: 34.45,
     likes_count: 0,
+    is_liked: false,
+    is_mine: false,
   },
 ]

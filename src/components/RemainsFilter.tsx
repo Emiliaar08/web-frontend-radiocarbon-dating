@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import type { FormEvent } from 'react'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
@@ -7,11 +6,12 @@ import { formatCarbon14 } from '../modules/remains'
 
 interface RemainsFilterProps {
   carbonMinimum: number
+  carbonValue: number
+  onChange: (carbonValue: number) => void
   onApply: (carbonMinimum: number) => void
 }
 
-export function RemainsFilter({ carbonMinimum, onApply }: RemainsFilterProps) {
-  const [carbonValue, setCarbonValue] = useState(carbonMinimum)
+export function RemainsFilter({ carbonMinimum, carbonValue, onChange, onApply }: RemainsFilterProps) {
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -19,7 +19,6 @@ export function RemainsFilter({ carbonMinimum, onApply }: RemainsFilterProps) {
   }
 
   function handleReset() {
-    setCarbonValue(0)
     onApply(0)
   }
 
@@ -34,7 +33,7 @@ export function RemainsFilter({ carbonMinimum, onApply }: RemainsFilterProps) {
             max={200}
             step={0.1}
             value={carbonValue}
-            onChange={(event) => setCarbonValue(Number(event.target.value))}
+            onChange={(event) => onChange(Number(event.target.value))}
             aria-describedby="remains-carbon-value"
             aria-valuetext={`От ${formatCarbon14(carbonValue)} pMC`}
           />
